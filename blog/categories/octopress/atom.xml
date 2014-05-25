@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[曲奕帆ghost]]></title>
-  <link href="http://ghostqu.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: octopress | 曲奕帆ghost]]></title>
+  <link href="http://ghostqu.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://ghostqu.github.io/"/>
   <updated>2014-05-26T01:23:45+08:00</updated>
   <id>http://ghostqu.github.io/</id>
