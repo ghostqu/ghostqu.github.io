@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: octopress | 曲奕帆ghost]]></title>
-  <link href="http://ghostqu.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <title><![CDATA[Category: github | 曲奕帆ghost]]></title>
+  <link href="http://ghostqu.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://ghostqu.github.io/"/>
   <updated>2014-05-28T02:06:06+08:00</updated>
   <id>http://ghostqu.github.io/</id>
@@ -178,69 +178,6 @@ $ rake deploy
 <p>只不过是全英文的。<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
 <li id="fn:5">
 <p>即rake generate之后<a href="#fnref:5" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[为什么我要写博客]]></title>
-    <link href="http://ghostqu.github.io/blog/2014/05/26/wei-shi-yao-wo-yao-xie-bo-ke/"/>
-    <updated>2014-05-26T01:13:04+08:00</updated>
-    <id>http://ghostqu.github.io/blog/2014/05/26/wei-shi-yao-wo-yao-xie-bo-ke</id>
-    <content type="html"><![CDATA[<h2>目录</h2>
-
-<ul>
-<li>序章</li>
-<li>0.Why Bloging</li>
-<li>1.Why Octopress</li>
-<li>2.My Spirit</li>
-<li>3.My Expection</li>
-</ul>
-
-
-<h2>序章</h2>
-
-<p>按照惯例，每一个用<a href="http://octopress.org/">Octopress</a>写博客的人第一篇博文都是要讨论Octopress，那么我也不能例外，虽然懂的不是太多，也写不了太多，但是也要啰嗦两句。</p>
-
-<hr />
-
-<h2>0.Why Bloging</h2>
-
-<p>很早就有要记录一点东西的想法，但是时间零零碎碎，想法松松散散，实在是不忍心贴出来玷污各位看官的眼睛。看过了刘未鹏的<a href="http://mindhacks.cn/2009/02/15/why-you-should-start-blogging-now/">《为什么你应该（从现在开始）写博客》</a>，又觉得既然已经过了每个二逼青年都应该变正常的22岁，不留下点东西给以后参阅，实乃人生一大憾事。<strong>所以写吧，把零零碎碎的想法归纳整理,留给以后参阅。</strong></p>
-
-<hr />
-
-<h2>1.Why Octopress</h2>
-
-<p>说实话，决定用Octopress搭设博客时确实有点脸红，人家明明白白写了<code>A bloging framework for hakers</code>我自认还不能称之为一名骇客。但是我是很向往骇客的那种<strong>追求自由</strong>的精神，所以就恬不知耻的用了Octopress。当然，好东西要大家分享，稍后几天我会整理一下如何用<code>git+github+octopress</code>搭设自己的博客，敬请各位看官期待。</p>
-
-<hr />
-
-<h2>2.My Spirit</h2>
-
-<p>说了追求骇客精神，就要表一下我是一个什么状态，为什么要去追求这种精神,自嘲一点的说，我是一个<strong>好玩</strong>的人，这里这个“好”读四声，不是说我人幽默或者是有趣，而是说我喜欢玩，看到有趣的东西就想插一脚，给这个特点做一个自我评定，有好也有坏；如果我不是这么一个好玩的人，可能各位看官就看不到我现在的博客了，但是又因为我是这么一个好玩的人，做什么事情又都没有什么定性，很有可能多年以后我翻出了这个博客，才发现只有这么一篇文字，然后背地里暗暗脸红，更甚于恼羞成怒删除博客。不过，既然在这里写了，那么对自己还是有点期望的，期望自己能坚持下去，期望自己能收获结果，希望多年之后我这个<a href="http://ghostqu.github.io">曲奕帆ghost&rsquo;s Blog</a>能繁荣向上,开花结果。所以，欢迎大家跟我<del>一起玩下去</del><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，啊，不，是跟我一起努力下去。</p>
-
-<hr />
-
-<h2>3.My Expection</h2>
-
-<p>介绍了自己的性格，就聊聊对自己的期望，对未来的梦想吧。不知各位看管注意到我侧边栏副标题吗？ <strong>Ever learning,never end.</strong>
-这句话原版是《新约·提摩太后书》第3章第7节：</p>
-
-<blockquote><p>Ever learning, and never able to come to the knowledge of the truth.</p>
-
-<p>终日而学，然不得事物之真理。</p></blockquote>
-
-<p>自认为很适合用来形容当前的我，接触了很多事物，也学到了很多，然而玩心太重，终没有一样精通，所以我把这句话改成了学无止境，希望自己能从各种各样好玩的有趣的事物中挑选出哪一种最适合的，研究透彻，才能继续在别的道路上越走越好。</p>
-
-<p>说实话，第一次写博客，突然发现组织文字也不是一件轻松的活。</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>大雾，这是口胡了<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
 
