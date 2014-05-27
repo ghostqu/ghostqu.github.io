@@ -4,7 +4,7 @@
   <title><![CDATA[曲奕帆ghost]]></title>
   <link href="http://ghostqu.github.io/atom.xml" rel="self"/>
   <link href="http://ghostqu.github.io/"/>
-  <updated>2014-05-28T02:06:06+08:00</updated>
+  <updated>2014-05-28T02:34:59+08:00</updated>
   <id>http://ghostqu.github.io/</id>
   <author>
     <name><![CDATA[ghostQu]]></name>
@@ -19,6 +19,9 @@
     <updated>2014-05-27T23:25:29+08:00</updated>
     <id>http://ghostqu.github.io/blog/2014/05/27/yong-git-plus-github-plus-octopressda-she-bo-ke</id>
     <content type="html"><![CDATA[<p>既然我答应大家要给大家一个<a href="http://github.com/">github</a>+<a href="http://octopress.org/">octopress</a>的教程，那么我就要说话算数，嗯，好吧那么下面给大家上步骤：</p>
+
+<!--more-->
+
 
 <h2>1.申请github账号，并建好respository</h2>
 
@@ -272,6 +275,9 @@
 <li>2.My Spirit</li>
 <li>3.My Expection</li>
 </ul>
+
+
+<!--more-->
 
 
 <h2>序章</h2>

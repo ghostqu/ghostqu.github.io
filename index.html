@@ -9,7 +9,7 @@
 	<meta name="author" content="ghostQu">
 
 	
-	<meta name="description" content="2014年05月27日 github, octopress | Comments 用git+github+octopress搭设博客 既然我答应大家要给大家一个github+octopress的教程，那么我就要说话算数，嗯，好吧那么下面给大家上步骤： 1.申请github账号， &hellip;">
+	<meta name="description" content="2014年05月27日 github, octopress | Comments 用git+github+octopress搭设博客 既然我答应大家要给大家一个github+octopress的教程，那么我就要说话算数，嗯，好吧那么下面给大家上步骤： Read on &rarr; &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,11 +50,11 @@
 </hgroup>
 
 <nav id="main-nav"><ul class="main">
-    <li><a href="/">Blog</a></li>
+    <li><a href="/">首页</a></li>
     
-    <li><a href="/blog/archives">Archives</a></li>
+    <li><a href="/blog/archives">所有文章</a></li>
 
-    <li><a href="http://about.me/shashankmehta">About</a></li>
+    <li><a href="http://about.me/shashankmehta">关于我</a></li>
 </ul>
 
 </nav>
@@ -131,244 +131,9 @@
 	<div class="entry-content" itemprop="articleBody">
 		<p>既然我答应大家要给大家一个<a href="http://github.com/">github</a>+<a href="http://octopress.org/">octopress</a>的教程，那么我就要说话算数，嗯，好吧那么下面给大家上步骤：</p>
 
-<h2>1.申请github账号，并建好respository</h2>
-
-<ul>
-<li>要用github做博客，那么我们需要一个<a href="http://github.com/">github</a>的账号，那么这个注册还是很简单的，只要照着这个图填好即可。
-<a href="" target="_blank"><img src="/images/github.png"/></a></li>
-<li>然后回到<a href="http://github.com/">github</a>页面，点击图中第2个图标respository。
-<a href="" target="_blank"><img src="/images/respositority.png"/></a></li>
-<li>这时候会弹出这样一个页面，我们只需要按照<strong> username.github.io </strong>来填写进项目名称，这样github会给生成一个静态的托管页面，供我们搭建博客。
-<a href="" target="_blank"><img src="/images/new.png"/></a>
-<strong>这里需要注意一点，上面的username一定要是你自己的用户名，而且要求是全部是小写<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</strong>用户名里有大写的童鞋可以注销账号重新申请了。</li>
-</ul>
-
-
-<hr />
-
-<h2>2.安装ssh和git，并进行github的配置</h2>
-
-<p>在这里我先提一下我用的是ubuntu 14.04 LTS这是一个linux内核的系统，所以我们使用git就能方便的在github上进行pull或push的操作，使用<strong>温妻</strong>的同学可以自己在网上找一下教程<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
-
-<ul>
-<li>安装过程很简单，只需要打开终端，输入</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$sudo</span> apt-get install git
-</span><span class='line'><span class="nv">$sudo</span> apt-get install ssh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>github需要我们提供ssh密匙，首先要确定系统中是否已存密匙，在终端输入以下命令。</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$cd</span> ~/.ssh
-</span><span class='line'><span class="nv">$ls</span> -al
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果，你的终端中显示有<code>id_rsa.pub</code>或者<code>id_dsa.pub</code>那么说明你已经有密匙了。
-* 如果没有密匙，那么需要生成，终端输入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ssh</span>-kengen -t ras -C <span class="s2">&quot;your_email@nidongde.com&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>确保自己没有输错的话，就一路enter，直到终端上显示类似</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>The key fingerprint is:
-</span><span class='line'>11:11:11:.................................
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>此时，向终端输入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ssh</span>-add ~/.ssh/id_rsa
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样我们就有了一个ssh密匙，接下来要把密匙加进github中。首先，无所谓用<code>gedit</code>还是<code>gvim</code>或者是<code>open office</code>打开<code>～/.ssh/id_rsa.pub</code>，将里面的内容<code>Ctrl+C</code>下来，接着点击github页面右上角的Account settings，即图中第二个图标。
-<a href="" target="_blank"><img src="/images/set.png"/></a>
-选择SSH keys，点击Add SSH key。将你刚才复制下来的东西统统<code>Ctrl+V</code>进<strong>Key</strong>里面。
-<a href="" target="_blank"><img src="/images/key.png"/></a>
-至于那个titile随便填个什么就好，甚至不填都没有问题。</p>
-
-<ul>
-<li>在git上配置好用户名和邮箱以便登陆，简简单单的在终端输入一下命令就好</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> config --global user.name <span class="s2">&quot;Your Name Here&quot;</span>
-</span><span class='line'><span class="nv">$git</span> config --global user.email <span class="s2">&quot;your_email@example.com&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意上面就是你<strong>注册github时用的用户名和邮箱</strong>千万不要填错了
-+ 最后，测试一下好不好用，终端输入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ssh</span> -T git@github.com
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>第一次连的时候可能还要问你是不是想访问之类的问题，不管它，直接yes，如果输出类似</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Hi ghostqu! You<span class="err">&#39;</span>ve successfully authenticated, but GitHub does not provide shell access.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就说明你访问成功了。</p>
-
-<hr />
-
-<h2>3.安装Octopress</h2>
-
-<p>如果大家对自己英文水平有自信可以直接访问<a href="http://octopress.org/">Octopress</a>的主页，因为接下来的东西基本我就是做了个翻译。</p>
-
-<p>*首先利用git命令把octopress克隆到主机上</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'><span class="nb">cd </span>octopress    <span class="c"># If you use RVM, You&#39;ll be asked if you trust the .rvmrc file (say yes).</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>接着安装依赖项</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install bundler
-</span><span class='line'>rbenv rehash    <span class="c"># If you use rbenv, rehash to be able to run the bundle command</span>
-</span><span class='line'>bundle install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>最后安装默认主题</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>注意我这里系统自带了ruby，如果没有这个的同学要自己安装，具体请参考<a href="http://octopress.org/docs/setup/rbenv/">Installing Ruby With Rbenv</a></strong></p>
-
-<hr />
-
-<h2>4.配置Octopress</h2>
-
-<p>其实在这里Octopress的作者真的很贴心，我们需要改的东西真心不多。打开octopress文件夹下的<code>_config.yml</code>
-+ 该文件中的<code>url</code>是必须要填写的，这里的<code>url</code>是在<a href="http://github.com/">github</a>上的页面地址，就是那个<code>username.github.io</code>
-+ 另外再修改一下title、subtitle和author，就是你博客的名字，博客的副标题<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>，还有你的名字啦
-+ 觉得改这些还是不够，想多改改的同学参见<a href="http://octopress.org/docs/configuring/">官网教程</a><sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></p>
-
-<hr />
-
-<h2>5.将博客上传到github上</h2>
-
-<p>我们需要利用<code>octopress</code>的一个配置<code>rake</code>任务来自动配置上面创建的仓库：可以让我们方便的部署GitHub page。在终端输入如下命令：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake setup_github_pages
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面的命令会做一些事情。其中最主要的就是创建一个_deploy目录，目录用来存放部署到master分支的内容。期间会要求你输入仓库的url，根据提示，进行输入即可。
-完成上面的命令之后，我们就可以生成博客并真正的部署到仓库中了。执行如下命令：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
-</span><span class='line'>rake deploy
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面的命令首先生成博客文件，并将生成的博客文件拷贝到_deploy/目录下，然后将这些内容添加到git中，并commit和push到仓库的master分支。
-现在可以访问<code>http://username.github.com</code>了。
-注意：有时候可能会有延时，要等几分钟才能打开。
-至此，我们的博客已经完成基本的部署，不过博客的source需要单独提交，执行如下命令就可以将source提交到仓库的source分支下。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> add .
-</span><span class='line'><span class="nv">$ </span>git commit -m <span class="s1">&#39;Initial source commit&#39;</span>
-</span><span class='line'><span class="nv">$ </span>git push origin <span class="nb">source</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果在部署到仓库之前，需要先预览一下博客，可以在终端输入<code>rake preview</code>命令，然后就能在浏览器中进行本地预览访问了<code>http://127.0.0.1:4000/</code>或<code>http://localhost:4000/</code>，效果跟上传到<code>github</code>中的一样。</p>
-
-<hr />
-
-<h2>6.发表新博文</h2>
-
-<p>我们需要调用octopress给我们的命令</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s2">&quot;title&quot;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>会让我们输入博客的题目什么的，生成的博文在<code>source/_post</code>下，以<code>日期-题目.markdown</code>命名，我们需要一个markdown编辑器即可，目前我用的是<code>retext</code>，推荐一个网页版<a href="https://www.zybuluo.com/mdeditor"><code>cmdMarkdown</code></a>
-然后上传文件</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake generate
-</span><span class='line'><span class="nv">$ </span>git add .
-</span><span class='line'><span class="nv">$ </span>git commit -am <span class="s2">&quot;Some comment here.&quot;</span>
-</span><span class='line'><span class="nv">$ </span>git push origin <span class="nb">source</span>
-</span><span class='line'><span class="nv">$ </span>rake deploy
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>当然，在上传之前<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>你依旧可以使用<code>rake preview</code>预览页面。</p>
-
-<p>第二次写博客，依旧猴累猴累的，不过还是能坚持。</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>我就是这么被坑了，一开始用户名是ghostQu，结果死活不生成页面。<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>Google is your good friend.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>就是我博客名字下面那个Ever learning，never end啦。<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-<li id="fn:4">
-<p>只不过是全英文的。<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
-<li id="fn:5">
-<p>即rake generate之后<a href="#fnref:5" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 
 		
-		
+		<a href="/blog/2014/05/27/yong-git-plus-github-plus-octopressda-she-bo-ke/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -415,53 +180,9 @@
 </ul>
 
 
-<h2>序章</h2>
-
-<p>按照惯例，每一个用<a href="http://octopress.org/">Octopress</a>写博客的人第一篇博文都是要讨论Octopress，那么我也不能例外，虽然懂的不是太多，也写不了太多，但是也要啰嗦两句。</p>
-
-<hr />
-
-<h2>0.Why Bloging</h2>
-
-<p>很早就有要记录一点东西的想法，但是时间零零碎碎，想法松松散散，实在是不忍心贴出来玷污各位看官的眼睛。看过了刘未鹏的<a href="http://mindhacks.cn/2009/02/15/why-you-should-start-blogging-now/">《为什么你应该（从现在开始）写博客》</a>，又觉得既然已经过了每个二逼青年都应该变正常的22岁，不留下点东西给以后参阅，实乃人生一大憾事。<strong>所以写吧，把零零碎碎的想法归纳整理,留给以后参阅。</strong></p>
-
-<hr />
-
-<h2>1.Why Octopress</h2>
-
-<p>说实话，决定用Octopress搭设博客时确实有点脸红，人家明明白白写了<code>A bloging framework for hakers</code>我自认还不能称之为一名骇客。但是我是很向往骇客的那种<strong>追求自由</strong>的精神，所以就恬不知耻的用了Octopress。当然，好东西要大家分享，稍后几天我会整理一下如何用<code>git+github+octopress</code>搭设自己的博客，敬请各位看官期待。</p>
-
-<hr />
-
-<h2>2.My Spirit</h2>
-
-<p>说了追求骇客精神，就要表一下我是一个什么状态，为什么要去追求这种精神,自嘲一点的说，我是一个<strong>好玩</strong>的人，这里这个“好”读四声，不是说我人幽默或者是有趣，而是说我喜欢玩，看到有趣的东西就想插一脚，给这个特点做一个自我评定，有好也有坏；如果我不是这么一个好玩的人，可能各位看官就看不到我现在的博客了，但是又因为我是这么一个好玩的人，做什么事情又都没有什么定性，很有可能多年以后我翻出了这个博客，才发现只有这么一篇文字，然后背地里暗暗脸红，更甚于恼羞成怒删除博客。不过，既然在这里写了，那么对自己还是有点期望的，期望自己能坚持下去，期望自己能收获结果，希望多年之后我这个<a href="http://ghostqu.github.io">曲奕帆ghost&rsquo;s Blog</a>能繁荣向上,开花结果。所以，欢迎大家跟我<del>一起玩下去</del><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，啊，不，是跟我一起努力下去。</p>
-
-<hr />
-
-<h2>3.My Expection</h2>
-
-<p>介绍了自己的性格，就聊聊对自己的期望，对未来的梦想吧。不知各位看管注意到我侧边栏副标题吗？ <strong>Ever learning,never end.</strong>
-这句话原版是《新约·提摩太后书》第3章第7节：</p>
-
-<blockquote><p>Ever learning, and never able to come to the knowledge of the truth.</p>
-
-<p>终日而学，然不得事物之真理。</p></blockquote>
-
-<p>自认为很适合用来形容当前的我，接触了很多事物，也学到了很多，然而玩心太重，终没有一样精通，所以我把这句话改成了学无止境，希望自己能从各种各样好玩的有趣的事物中挑选出哪一种最适合的，研究透彻，才能继续在别的道路上越走越好。</p>
-
-<p>说实话，第一次写博客，突然发现组织文字也不是一件轻松的活。</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>大雾，这是口胡了<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 
 		
-		
+		<a href="/blog/2014/05/26/wei-shi-yao-wo-yao-xie-bo-ke/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
