@@ -7,12 +7,12 @@ categories: 闲谈杂记
 
 ---
 ##0.缘起
-各位看官大家好，这里是悠悠曲。大约一个星期之前，我跟杨小姐决定开展一个暑期C语言和C++的学习计划，并约定每天都要做编程的学习笔记。因此，在正式的进入 xu学习状态之前，我想先谈谈，编程对于我们是什么，有什么意义以及对新手来说正确的编程思路是什么。
+各位看官大家好，这里是悠悠曲。大约一个星期之前，我跟杨小姐决定开展一个暑期C语言和C++的学习计划，并约定每天都要做编程的学习笔记。因此，在正式的进入学习状态之前，我想先谈谈闲篇，包括编程对于我们是什么，有什么意义以及对新手来说正确的编程思路是什么。
 
 <!--more-->
 ---
 ##1.什么是程序?
-什么是程序？跟据维基百科：
+什么是程序？根据维基百科：
 
 >A computer program is a collection of instructions that performs a specific task when executed by a computer. A computer requires programs to function, and typically executes the program's instructions in a central processing unit.
 
