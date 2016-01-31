@@ -4,12 +4,14 @@ single: true
 ---
 
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">{% include article.html %}</article>
+<!--
 {% unless page.sharing == false %}
 	{% include post/sharing.html %}
 {% endunless %}
-{% if site.duoshuo_show_comment_count==true %}
-<section imagesd="comment">
-<h1>Add a comment</h1>
-{% include post/duoshuo.html %}
-</section>
+-->
+{% if site.duoshuo_short_name and site.duoshuo_comments == true and page.comments == true %}
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">{% include post/duoshuo.html %}</div>
+  </section>
 {% endif %}

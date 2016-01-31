@@ -12,7 +12,7 @@ categories: octopress
 * 1.Why Octopress
 * 2.My Spirit
 * 3.My Expection
-
+<!--more-->
 ##序章##
 
 按照惯例，每一个用[Octopress][1]写博客的人第一篇博文都是要讨论Octopress，那么我也不能例外，虽然懂的不是太多，也写不了太多，但是也要啰嗦两句。

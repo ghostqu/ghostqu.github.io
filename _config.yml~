@@ -63,7 +63,7 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 
 # Github repositories
-github_user:
+github_user: ghostqu
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
@@ -94,7 +94,9 @@ delicious_count: 3
 #disqus_show_comment_count: false
 
 #Duoshuo Comments
-duoshuo_show_comment_count: true
+duoshuo_comments: true
+duoshuo_short_name: ghostqu
+#duoshuo_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id:
