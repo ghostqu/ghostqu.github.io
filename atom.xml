@@ -4,7 +4,7 @@
   <title><![CDATA[曲奕帆ghost]]></title>
   <link href="http://ghostqu.github.io/atom.xml" rel="self"/>
   <link href="http://ghostqu.github.io/"/>
-  <updated>2014-05-30T00:27:58+08:00</updated>
+  <updated>2016-01-31T20:59:28+08:00</updated>
   <id>http://ghostqu.github.io/</id>
   <author>
     <name><![CDATA[ghostQu]]></name>
@@ -12,6 +12,233 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[关于编程的二三事]]></title>
+    <link href="http://ghostqu.github.io/blog/2016/01/30/he-yang-xiao-jie-yi-qi-de-c-plus-plus-xue-xi-ri-ji/"/>
+    <updated>2016-01-30T20:37:43+08:00</updated>
+    <id>http://ghostqu.github.io/blog/2016/01/30/he-yang-xiao-jie-yi-qi-de-c-plus-plus-xue-xi-ri-ji</id>
+    <content type="html"><![CDATA[<h2>0.缘起</h2>
+
+<p>各位看官大家好，这里是悠悠曲。大约一个星期之前，我跟杨小姐决定开展一个暑期C语言和C++的学习计划，并约定每天都要做编程的学习笔记。因此，在正式的进入 xu学习状态之前，我想先谈谈，编程对于我们是什么，有什么意义以及对新手来说正确的编程思路是什么。</p>
+
+<!--more-->
+
+
+<hr />
+
+<h2>1.什么是程序?</h2>
+
+<p>什么是程序？跟据维基百科：</p>
+
+<blockquote><p>A computer program is a collection of instructions that performs a specific task when executed by a computer. A computer requires programs to function, and typically executes the program&rsquo;s instructions in a central processing unit.</p></blockquote>
+
+<p>程序是计算机执行任务时候需要的一系列指令。计算机为实现某项功能，需要程序来指引，即在核心进程单元中执行程序指令。形象一点说，把计算机想象成一个智商有很大的缺陷的人，他生理缺陷非常严重，甚至于我们说：“拿杯水过来。”他都做不到，我们必须命令他：“往前走两步，手掌伸开，把手臂放下三厘米，手掌握住，后退两步。”他才能把水给你。那么，在这个例子中，我们给他下达的这一系列命令就是程序。当然，鄙人也有自己的定义，将会在后面给给位看官细细解释。</p>
+
+<hr />
+
+<h2>2.为什么要学习编程？</h2>
+
+<p>那么，我们需要学习如何编写程序吗？我的答案是<strong>“yes”</strong>。</p>
+
+<p>衡量一件事物是否有价值就要看它被社会的接受程度，当某件事物成为大部分人的日常用品，就说明这件事物有极大的重要性。所以，首先，我们要从普及性来讲，很多人都知道电脑，手机需要程序支持<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，可是很少有人意识到除开这两样设备，程序依然贯穿于我们的生活之中，微波炉，洗衣机，ATM机，电视机顶盒，电子门禁，几乎涵盖了我们生活的各种方面。我可以说如果有一天世界上所有电子设备中的程序都被抹除，那么有些人一天也活不下去。</p>
+
+<p>其次，编写程序有什么意义？我知道这时候有些人会说：“那又怎么样，我只要会用就行了，会写程序现实生活也用不上。”在此，我要提及前几天在驾校遇到的事情:<strong>有人给我出了这样一个题目，一堆鸡蛋，一个一个拿正好拿完，两个两个拿还剩一个，三个三个拿正好拿完，四个四个拿还剩一个，五个五个拿还剩四个，六个六个拿还剩三个，七个七个拿还剩五个，八个八个拿还剩一个，九个九个拿正好拿完，求一万以内的所有可能解。</strong>你会用多长时间来解决这个题目呢？实话是我用了一个上午都没有做出来，作为一个工科生，十分挫败。可是工科生难道不应该用工科生的方式解决问题吗？一个程序解决了所有问题，用时3分11秒，这就是程序的意义。</p>
+
+<p>更何况，编程程序所用到的一些思路在解决其他问题时依旧好用，比如说我们常用的<code>自顶向下</code>方法，即将大问题分解为相对简单的小问题，找出每个问题的关键、重点所在，然后解决问题。这种方法在处理那些你一下子摸不到头绪的问题时特别好用，核心在于它将问题分解了。比如说，我们要造一台跑车，可是我们从未有过相关的知识，因此也不知从何着手。那么，按照自顶向下的方法，把问题拆解，看看会不会变得简单。首先，跑车分为外壳，底盘和机械部分，然后，外壳分为扒拉扒拉，底盘分为巴拉巴拉，机械部分分为变速箱，发动机，传动装置等。然后发送机分为汽缸头，活塞等。我相信到这一步网络上一定有很多资料可以供你参考。<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>由此可见程序的思想在日常生活中也会起到很大作用，本质上程序就是源于生活，是思想的一种表达方式，因此回归于生活也不是什么稀奇事。</p>
+
+<hr />
+
+<h2>3.为什么你不愿意编程？</h2>
+
+<p>事实上，即便如此，许多人还是不愿意学习编程。很多人都接触过编程或者说不得不接触编程，C语言是大学的一个必修课，很多专业学院也必须要接触与编程相关的科目。但是有些有编程应用专业的学生依然不情愿去编程。我们常常能看到以下问题。</p>
+
+<p>1.编程好难啊，编程需要很强的逻辑思维，我逻辑思考能力差，所以不适合编程。</p>
+
+<p>很有意思的观点，而且是绝大部分的人都会这么认为的。但是，事实就是这样吗？编程真的是逻辑思维强的人才能驾驭的吗？其实不然，还记得在那个例子吗？计算机本身没有思考能力，程序就是它需要执行的指令。那么这个指令来自于哪里呢？来源于人。所以这里给出我对程序的定义，程序是人思想的一部分，即把自己的思维描述出来，然后灌输给计算机，本质上，每一个你编写的程序在某种程度上相当于你的分身。这跟逻辑思维<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>毫无关联，我们不需要去推理什么，大部分情况下，我们只需要将自身的思考过程用程序的语言描述出来就可以了，与其说是逻辑思维还不如是惯性思维或者说是表述能力。所以，以平均水平的逻辑思考能力就足以应付绝大部分的情况<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>，只需要你记住编写程序需要的语法和关键字。</p>
+
+<p>2.编程好无聊啊，要记得各种各样的关键字，语句。而且一点都不好玩。</p>
+
+<p>的确，学习编程初期是一个很枯燥的过程，需要死板的记忆。然而，当你掌握了基本规则之后，就会发现编程是一项很有趣的活动。为什么我会这么说？因为编程可以满足人们心理上的诸多渴求，包括支配欲，倾诉欲，占有欲等<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>。编程就像在沙滩上堆沙堡，画纸上作画，钢琴上演奏，是一种灵感的迸发，是一种思维的表达，是一种创作欲的倾泻。当然，这个可能过于抽象，具体一点说，你有想过用程序做什么吗？有想过用自己编写一个桌面导航吗？或者做一个siri？或者研究下底层软件，做一个四轴飞行器？总之，当程序本身有了意义，你就会发现编程的乐趣。</p>
+
+<hr />
+
+<h2>4.编程的思路是什么？</h2>
+
+<p>编程其实是一个逐渐细化的过程，很多对编程束手无策的人其实是没有意识到这一点。对于新手而言，不要一开始就期望编写出最符合预期的程序，而是应该像做一个雕刻一样，凿出一个轮廓然后，逐渐完成细节的优化。我们以鸡蛋的程序作为例子。</p>
+
+<blockquote><p>一堆鸡蛋，一个一个拿正好拿完，两个两个拿还剩一个，三个三个拿正好拿完，四个四个拿还剩一个，五个五个拿还剩四个，六个六个拿还剩三个，七个七个拿还剩五个，八个八个拿还剩一个，九个九个拿正好拿完，求一万以内的所有可能解。</p></blockquote>
+
+<p>我相信很多在大学学过C语言并且考过计算机二级的人都不会觉得这个题目很难，但是，我相信60%以上的人写出的程序会是这个样子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'>    int eggs;
+</span><span class='line'>    for (eggs=0;eggs&lt;10000;egg++)
+</span><span class='line'>    {
+</span><span class='line'>        if(eggs%2==1)
+</span><span class='line'>          {
+</span><span class='line'>            if(eggs%3==0)
+</span><span class='line'>            {
+</span><span class='line'>                if(eggs%4==1)
+</span><span class='line'>                {
+</span><span class='line'>                    if(eggs%5==4)
+</span><span class='line'>                    {
+</span><span class='line'>                        if(eggs%6==4)
+</span><span class='line'>                        {
+</span><span class='line'>                            if(eggs%7==5)
+</span><span class='line'>                            {
+</span><span class='line'>                                if(eggs%8==1)
+</span><span class='line'>                                {
+</span><span class='line'>                                    if(eggs%9==0)
+</span><span class='line'>                                    {
+</span><span class='line'>                                        printf("%d\n",eggs);
+</span><span class='line'>                                    }
+</span><span class='line'>                                }
+</span><span class='line'>                            }
+</span><span class='line'>                        }
+</span><span class='line'>                    }
+</span><span class='line'>                }
+</span><span class='line'>            }
+</span><span class='line'>         }
+</span><span class='line'>    }
+</span><span class='line'>    return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>事实上，这个程序完全没有问题，语法结构是正确的，运算结果是正确的，可是问题在于它长了，我说的长不光指这个程序有35行之多，更在于它在<strong>算法的时间复杂度</strong>上的长。不过对于新手而言这个完全OK，可是很多人预期不是这样的，他们期望一个简短的结果，在编写这个长串版本的代码时他们觉得很麻烦，而且长意味容易出错，可能细小的疏忽造成的ERROR使程序无法运行，以至于造成一种程序很难的假象。下面我们对程序进行精简。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'>    int eggs;
+</span><span class='line'>    for(eggs=0;eggs&lt;10000;eggs++)
+</span><span class='line'>    {
+</span><span class='line'>        if(eggs%2==1 && eggs%3==0 && eggs%4==1 && eggs%5==4 && 
+</span><span class='line'>           eggs%6==4 && eggs%7==5 && eggs%8==1 && eggs%9==0)
+</span><span class='line'>        {
+</span><span class='line'>         printf("%d\n",eggs);
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>    return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>精简过后的程序只剩15行，相信已经可以满足很多人的需要了，我们也可以看出这些程序完全没有用到逻辑思维能力，相信到这一步大家也可以满意了。往下简化就需要逻辑思维能力了，作为一个只有一个变量的程序从程序的空间复杂度上已经很难精简，只能继续从时间复杂复杂度上着手。简化如下。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'>    int eggs;
+</span><span class='line'>    for(eggs=9;eggs&lt;10000;eggs+=10)
+</span><span class='line'>    {
+</span><span class='line'>        if(eggs%4==1 && eggs%6==4 && eggs%7==5 && eggs%8==1 && eggs%9==0)
+</span><span class='line'>        {
+</span><span class='line'>         printf("%d\n",eggs);
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>    return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个程序比上一在时间复杂度上简化了10倍，这是因为由条件2和5可知所求数尾数为9，只需要每次加10保持尾数不变即可。由此可见，其实编程的思想就是这样由浅入深的，先是最简单的机械重复和描述，然后精简，最后加上一些推理。</p>
+
+<p>那么，从下期开始就开始正式的C语言学习笔记了，在此之前，留下几个问题：
+1.什么是程序的可移植性？
+2.程序分为编译型和解释型，它们有什么区别？
+3.什么是程序的时间负载度和空间复杂的？</p>
+
+<hr />
+
+<h4><strong>特别提醒:</strong></h4>
+
+<p>以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>虽然我认为电脑和手机已经可以说明问题了。<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>其实这个例子还有一个蒸包子版本，把包子分为面皮和馅料，面皮分为面粉量，水量，酵母量，发酵时间；馅料分为，菜肉比，预处理方式，调料量。但是这个版本是不是有点太简单了，毕竟我会蒸包子，可是我不会造跑车。<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>逻辑思维是人的理性认识阶段，人运用概念、判断、推理等思维类型反映事物本质与规律的认识过程。它强调的是人的推理判断能力。<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+<li id="fn:4">
+<p>少部分情况是指你需要对程序的空间复杂度和时间复杂度进行大量精简时。<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
+<li id="fn:5">
+<p>我承认这么说是有点夸张了。<a href="#fnref:5" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ 用git+github+octopress搭设博客]]></title>
