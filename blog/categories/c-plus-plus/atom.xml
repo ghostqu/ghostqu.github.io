@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C++ | 曲奕帆ghost]]></title>
+  <link href="http://ghostqu.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
+  <link href="http://ghostqu.github.io/"/>
+  <updated>2016-02-02T23:59:53+08:00</updated>
+  <id>http://ghostqu.github.io/</id>
+  <author>
+    <name><![CDATA[ghostQu]]></name>
+    <email><![CDATA[ghostqu0@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C++学习笔记]]></title>
+    <link href="http://ghostqu.github.io/blog/2016/02/02/c-plus-01/"/>
+    <updated>2016-02-02T23:57:13+08:00</updated>
+    <id>http://ghostqu.github.io/blog/2016/02/02/c-plus-01</id>
+    <content type="html"><![CDATA[<h1>我的C++学习笔记</h1>
+
+<p>标签（空格分隔）： C++</p>
+
+<hr />
+
+<p>今天开始正式步入C++的学习中，作为学习笔记，我决定采用先定义再程序再讲解讲解的方式记录，即首先我会讲解一些概念性的问题，然后用一个程序作为实力，在对程序进行讲解。</p>
+
+<!--more-->
+
+
+<hr />
+
+<h2>1.概念与定义</h2>
+
+<p>我们在今天的学习开始要提及一个规定：</p>
+
+<blockquote><p>对于一个算法，可以没有输入但是不能没有输出。</p></blockquote>
+
+<p>有些童靴可能会觉得奇怪，为什么可以没有输入但是必须有输出？原因如下，可以没有输入的原因是，我们可以在编写程序时，初始化并给某个变量赋值，并不一定要依赖于外部设备的输入；而<strong>如果我们不能知道这个程序算法运行结果如何，这个算法对我们就没有意义</strong>，所以必须要有输出，不过需要注意的是输出并不一定是显示于屏幕的字符，可以是一段声音，一个图形的移动，甚至于在单片机中某个引脚的高低变换。但是作为初学者常用的输出方式，就是在终端中显示字符。因此我们今天将提及C++中用于输入输出的函数。</p>
+
+<p>下面阐述一个重要定义</p>
+
+<p>变量的声明和定义，很多同学都容易把这<strong>两个</strong>概念弄混,注意是两个概念，两个呦。这个两个概念的区别在于一种是需要建立存储空间的，这个叫做“定义性声明（defining declaration）”或者称为“定义（definition）”，如int a；在声明时就已经建立了存储空间，另一种是不需要建立存储空间的，如extern int a;其中变量a是在别的程序中定义的，这个叫做“引用性声明（referncing declaration）”，当然广义来讲，声明是包括定义的，但是并非所有声明都是定义，上面的例子已经很好的说明了这个问题。</p>
+
+<p>那么声明和定义的作用是什么？声明是为了在定义之前能够使用，这个是由编译器的特性决定的，比如说我们编写一个函数，作用是把两个变量相加，但是这个函数位于main函数之后。如果我们不提前声明的话，编译器将无法识别这个函数名导致程序无法通过编译。举个例子，某导演要拍一个电影，他可以说某几段我要做特效（声明），然后后期再把特效组的人请过来（定义），但是如果不提前告知大家这里要做特效（声明），可能剪辑组的人在不知情的情况下，就会将整个影片错误剪辑（不能正常运行）。因此，同一个变量或者函数，可以声明多次，但是只可以定义一次（毕竟只能请一个特效组）。</p>
+
+<p>整型：C++中用于存储整数的变量类型，C++中整型包括long、unsigned long、int、unsigned int、short、unsigned short、char、unsigned char和bool。C++11中又新增了两个整型分别是long long和unsigned long long。
+有趣的是C++对于这个变量类型的长度规定十分灵活，其中short必须保证两字节，即16位；int至少于short一样长；long至少四个字节，即32位且至少与int一样长；long long至少八个字节，即64位且至少与long一样长。这意味着在不同的编译器中，整型的长度可能不同，有兴趣的同学可以多装几个编译器做个实验。</p>
+
+<p>这里需要注意的整形的取值范围，以16位int为例，其取值范围为-32768到+32767，正数比负数小1是因为其中有个0，那么16位unsigned int取值范围就是0到65535。</p>
+
+<p>浮点型：用存储带小数部分数字的变量类型，注意这里的带小数部分数字<strong>包括指数</strong>。C++中内置的浮点数包括float、double和long double。其中float至少32位，double至少48位，且不能少于float,long double至少跟double一样多，这表明这三个类型可以相同长度，但是，通常float为32位，double为64位，long double为80、96或128位。</p>
+
+<hr />
+
+<h2>2.程序实例</h2>
+
+<p>编写一个程序，要求输入地区人口数（整型）和地区面积，求单位面积人口数，分别以一下方式显示
+（1）用编译器默认方式显示。
+（2）取小数点后3位显示。
+（3）用指数方式显示。
+C++程序如下：</p>
+
+<p>```
+//01.cpp-Caculate the population density</p>
+
+<h1>include <iostream></h1>
+
+<h1>include <iomanip></h1>
+
+<p>int main()
+{</p>
+
+<pre><code>using namespace std;
+
+int population;
+float area,density;
+
+cout &lt;&lt; "Please input the population" &lt;&lt;endl;
+cin &gt;&gt; population;
+cout &lt;&lt; "Please input the proportion " &lt;&lt;endl;
+cin &gt;&gt; area;
+
+density = (float) population / area;
+
+cout &lt;&lt; "The population density is " &lt;&lt; density &lt;&lt; endl;
+cout &lt;&lt; "The population density is " &lt;&lt; setprecision(3) &lt;&lt; density &lt;&lt; endl;
+cout &lt;&lt; "The population density is " &lt;&lt; scientific&lt;&lt;density &lt;&lt; endl;
+
+return 0;
+}
+</code></pre>
+
+<p><code>
+程序结果如下：
+</code>
+Please input the population
+12345
+Please input the proportion
+423
+The population density is 29.1844
+The population density is 29.2
+The population density is 2.918e+01</p>
+
+<hr />
+
+<p>(program exited with code: 0)
+Press return to continue
+```</p>
+
+<p>C语言程序如下：
+```
+//01.cpp-Caculate the population density</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int main()
+{</p>
+
+<pre><code>int population;
+float area,density;
+
+printf( "Please input the population\n" );
+scanf("%d",&amp;population);
+printf( "Please input the proportion \n" );
+scanf("%f",&amp;area);
+
+density = population / area;
+
+printf( "The population density is " );
+printf( "%f\n",density );
+
+printf( "The population density is " );
+printf( "%.3f\n",density );
+
+printf( "The population density is " );
+printf( "%e\n",density );
+
+
+return 0;
+}
+</code></pre>
+
+<p><code>
+输出结果如下：
+</code>
+Please input the population
+12345
+Please input the proportion
+423
+The population density is 29.1844
+The population density is 29.2
+The population density is 2.918e+01</p>
+
+<hr />
+
+<p>(program exited with code: 0)
+Press return to continue</p>
+
+<p>```</p>
+
+<hr />
+
+<h2>3.程序分析</h2>
+
+<p>作为第一天的学习笔记我会省略一些东西留作日后再讲，例如<code>using namespace std；</code>，首先说C跟C++共同点，都必须有main函数，main函数的作用是连接操作系统与程序，编译器会将启动代码放入main函数中，以便系统调用，启动代码就是连接系统与程序的桥梁。注意两点，其一，不管是在C还是C++中main函数必须不接受任何参数，即main（void）。其二，C++中规定main函数格式必须为<code>int main()</code>在程序的最后<code>return 0</code>，。</p>
+
+<p>C++中格式化输出要调用I/O流控制头文件iomanip.h，以下是一些常用的格式化输出:</p>
+
+<blockquote><p>dec 置基数为10 相当于"%d"
+hex 置基数为16 相当于"%X"
+oct 置基数为8 相当于"%o"
+setfill&copy; 设填充字符为c
+setprecision(n)   设显示小数精度为n位
+setw(n) 设域宽为n个字符
+setioflags(ios::fixed)   固定的浮点显示
+setioflags(ios::scientific) 指数表示
+setiosflags(ios::left) 左对齐
+setiosflags(ios::right) 右对齐
+setiosflags(ios::skipws) 忽略前导空白
+setiosflags(ios::uppercase) 16进制数大写输出
+setiosflags(ios::lowercase) 16进制小写输出
+setiosflags(ios::showpoint) 强制显示小数点
+setiosflags(ios::showpos)   强制显示符号</p></blockquote>
+
+<p>C语言中的格式化输出如下：</p>
+
+<p>C中格式字符串的一般形式为：
+printf(&ldquo;%[标志][输出最小宽度][.精度][长度]类型"，变量);其中方括号[]中的项为可选项。
+表示输出类型的格式字符 　　　　　 格式字符意义
+a　　　　　　　　　　　　　　　　 浮点数、十六进制数字和p-计数法(C99)
+A 　　　　　　　　　　　　　　　　浮点数、十六进制数字和p-计数法(C99)
+c 　　　　　　　　　　　　　　　　输出单个字符
+d 　　　　　　　　　　　　　　　　以十进制形式输出带符号整数
+e 　　　　　　　　　　　　　　　　以指数形式输出单、双精度实数
+E 　　　　　　　　　　　　　　　　以指数形式输出单、双精度实数
+f 　　　　　　　　　　　　　　　　以小数形式输出单、双精度实数
+g 　　　　　　　　　　　　　　　　以%f%e中较短的输出宽度输出
+G 　　　　　　　　　　　　　　　　以%f%e中较短的输出宽度输出
+i 　　　　　　　　　　　　　　　　有符号十进制整数(与%d相同)
+o 　　　　　　　　　　　　　　　　以八进制形式输出无符号整数
+p 　　　　　　　　　　　　　　　　指针
+s 　　　　　　　　　　　　　　　　输出字符串
+x 　　　　　　　　　　　　　　　　以十六进制形式输出无符号整数
+X　　　　　　　　　　　　　　　　 以十六进制形式输出无符号整数
+u 　　　　　　　　　　　　　　　　以十进制形式输出无符号整数</p>
+
+<p>另外需要注意一点，在C和C++中，做除法运算时，两个整型量相除，出来的结果依旧是整型，例如3/4=0，若想保证输出结果为浮点需强制转换，格式为<code>（转换类型）变量</code>。</p>
+
+<hr />
+
+<p>今天由于练车晚上回来有点晚，笔记做的有点水希望Miss.Yang原谅，另以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻</p>
+
+<hr />
+
+<p>作业：
+1.C中格式化输出的[标志]都有哪些？分别有什么用.
+2.编写一个程序，要求输入汽车行驶里数（整型）和耗油量（整型），输出平均油耗，分别以以下方式显示。</p>
+
+<pre><code>（1）保留后2位小数。
+（2）保留后8位不足的用0填补（建议输入12,5）
+（3）（C语言）左对齐输出长度5位，小数点后2位的指数并带正负号。
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
