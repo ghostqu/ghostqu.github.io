@@ -1,13 +1,10 @@
 ---
 layout: post
-title: "C++学习笔记"
+title: "我的C++学习笔记1"
 date: 2016-02-02 23:57:13 +0800
 comments: true
 categories: C++
----
-# 我的C++学习笔记
 
-标签（空格分隔）： C++
 
 ---
 今天开始正式步入C++的学习中，作为学习笔记，我决定采用先定义再程序再讲解讲解的方式记录，即首先我会讲解一些概念性的问题，然后用一个程序作为实力，在对程序进行讲解。
@@ -142,21 +139,21 @@ Press return to continue
 
 C++中格式化输出要调用I/O流控制头文件iomanip.h，以下是一些常用的格式化输出:
 
->dec 置基数为10 相当于"%d"
-hex 置基数为16 相当于"%X"
-oct 置基数为8 相当于"%o"
-setfill(c) 设填充字符为c
-setprecision(n)   设显示小数精度为n位
-setw(n) 设域宽为n个字符
-setioflags(ios::fixed)   固定的浮点显示
-setioflags(ios::scientific) 指数表示
-setiosflags(ios::left) 左对齐
-setiosflags(ios::right) 右对齐
-setiosflags(ios::skipws) 忽略前导空白
-setiosflags(ios::uppercase) 16进制数大写输出
-setiosflags(ios::lowercase) 16进制小写输出
-setiosflags(ios::showpoint) 强制显示小数点
-setiosflags(ios::showpos)   强制显示符号
+|dec |置基数为10 相当于"%d"|
+|hex |置基数为16 相当于"%X"|
+|oct |置基数为8 相当于"%o"|
+|setfill(c) |设填充字符为c|
+|setprecision(n)  | 设显示小数精度为n位|
+|setw(n) |设域宽为n个字符|
+|setioflags(ios::fixed)  | 固定的浮点显示|
+|setioflags(ios::scientific) |指数表示|
+|setiosflags(ios::left)| 左对齐|
+|setiosflags(ios::right) |右对齐|
+|setiosflags(ios::skipws) |忽略前导空白|
+|setiosflags(ios::uppercase) |16进制数大写输出|
+|setiosflags(ios::lowercase) |16进制小写输出|
+|setiosflags(ios::showpoint) |强制显示小数点|
+|setiosflags(ios::showpos)   |强制显示符号|
 
 C语言中的格式化输出如下：
 
