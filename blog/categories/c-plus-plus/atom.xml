@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C++ | 曲奕帆ghost]]></title>
   <link href="http://ghostqu.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
   <link href="http://ghostqu.github.io/"/>
-  <updated>2016-02-02T23:59:53+08:00</updated>
+  <updated>2016-02-04T23:17:06+08:00</updated>
   <id>http://ghostqu.github.io/</id>
   <author>
     <name><![CDATA[ghostQu]]></name>
@@ -14,17 +14,195 @@
 
   
   <entry>
-    <title type="html"><![CDATA[C++学习笔记]]></title>
-    <link href="http://ghostqu.github.io/blog/2016/02/02/c-plus-01/"/>
-    <updated>2016-02-02T23:57:13+08:00</updated>
-    <id>http://ghostqu.github.io/blog/2016/02/02/c-plus-01</id>
-    <content type="html"><![CDATA[<h1>我的C++学习笔记</h1>
+    <title type="html"><![CDATA[我的C++学习笔记2]]></title>
+    <link href="http://ghostqu.github.io/blog/2016/02/04/c-plus-plus-xue-xi-bi-ji-er/"/>
+    <updated>2016-02-04T23:10:09+08:00</updated>
+    <id>http://ghostqu.github.io/blog/2016/02/04/c-plus-plus-xue-xi-bi-ji-er</id>
+    <content type="html"><![CDATA[<p>昨天讲了程序的格式化输出，今天继续上文，即程序的输入部分，首先我们还是继续来讲解一些定义。</p>
 
-<p>标签（空格分隔）： C++</p>
+<!--more-->
+
 
 <hr />
 
-<p>今天开始正式步入C++的学习中，作为学习笔记，我决定采用先定义再程序再讲解讲解的方式记录，即首先我会讲解一些概念性的问题，然后用一个程序作为实力，在对程序进行讲解。</p>
+<h2>1.定义和概念</h2>
+
+<p><strong>数组(array)</strong>是一种数据格式，作用是储存多个相同类型的值。当我们要声明一个数组时要指出以下三点，数组类型，数组名和数组中的元素数。声明数组的通用格式如下<code>typeName arrayName[arraySize];</code>其中数组长度arraySize必须为整型常数或const值，也可以是常量表达式<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，换句话说，arraySize的数值在编译之前必须是确定已知的。</p>
+
+<p><strong>注意:</strong>数组内元素是可以单独调用的，但是使用时需要注意一点，数组声明是arraySize是数组长度，但是数组中的元素序号是从0开始的。例如，我们声明一个长度为10的数组<code>int i[10];</code>，数组的元素是0~9而不是1～10;，切记切记。</p>
+
+<p>另一个需要注意的地方是数组的初始化，当我们<strong>定义数组</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>时我们可以给数组以以下方式赋值<code>int num[4]={1,2,3,4};</code>；当然我们也可以只给一部分元素赋值，例如<code>int num[4]={1,2};</code>和<code>int num[4]={1,,3};</code>前一语句给第1、2号元素赋值，后一句给第1、3号元素赋值，其他没有赋值的元素默认为0；另外我们也可以把数组内所有元素初始化为0，如<code>int num[4]={0};</code>。</p>
+
+<p>这里有一个有趣的情况，当我们用以上方式定义数组时，可以不输入数组长度，即方括号中为空，这时编译器会自动计算数组长度，例如<code>int num[]={1,2,3,4};</code>数组长度为4;。</p>
+
+<p>另外数组之间不能互相赋值，例如：
+<code>
+int num[4] = {1,2,3,4};
+int num1[4] = {0}
+num = num1;  //This is an ERROR
+</code>
+这个是错误的，编译器会报错。</p>
+
+<p><strong>字符串</strong>本质上是一个char型数组，用于存储连续的本本文字。我们有一个非常方便的方式在<strong>声明数组</strong>时将字符串写入，声明方式如下<code>char myName[] = "Mr.Qu";</code>。</p>
+
+<p><strong>注意:</strong>在C++中，所有字符串都是以空字符结尾(即\0)，这个是用来标记字符串结尾的，当我们输入<code>char myName[] = "Mr.Qu";</code>时，编译器隐性的在结尾加入了空字符，因此这个数组的长度为6而不是5。</p>
+
+<p>另有一点有趣的应用大家可以做实验尝试一下，按照以下程序会输出什么？
+```</p>
+
+<h1>include <iostream></h1>
+
+<p>int main()
+{
+ using namespace std;
+ char myName[6] = {&rsquo;M',&lsquo;r&rsquo;,&lsquo;.&rsquo;,&lsquo;Q&rsquo;,&lsquo;\0&rsquo;,&lsquo;u&rsquo;};
+ char myName1[5] = {&rsquo;M',&lsquo;r&rsquo;,&lsquo;.&rsquo;,&lsquo;Q&rsquo;,&lsquo;u&rsquo;};
+ cout &lt;&lt; myName &lt;&lt; endl;
+ cout &lt;&lt; myName1 &lt;&lt; endl;
+ return 0;
+}
+```</p>
+
+<hr />
+
+<h2>2.程序及作业</h2>
+
+<p>鉴于从今天开始我只做C++部分的笔记，所以作业我用C++来做。程序要求为正确输入并显示一段有空格的字符串。
+```
+// 02.cpp &mdash;read one string</p>
+
+<h1>include <iostream></h1>
+
+<p>int main()
+{</p>
+
+<pre><code>using namespace std;
+
+const int strLength=100;
+char strRead[strLength];
+
+cout &lt;&lt; "Please input the string." &lt;&lt; endl;
+//cin &gt;&gt; strRead; //this is wrong
+cin.getline(strRead,strLength);
+
+cout &lt;&lt; "The string you just entered is " &lt;&lt; endl
+        &lt;&lt; strRead &lt;&lt; endl;
+
+return 0;
+}
+</code></pre>
+
+<p>```</p>
+
+<p>程序运行结果如下：</p>
+
+<p>```
+Please input the string.
+I Love You!
+The string you just entered is
+I Love You!</p>
+
+<hr />
+
+<p>(program exited with code: 0)
+Press return to continue</p>
+
+<p>```</p>
+
+<hr />
+
+<h2>3.程序分析</h2>
+
+<p>首先，各位看官肯定发现了一个从未见过的关键字<code>const</code>，<code>const</code>叫做限定符，作用是把<strong>一个对象转化为常量</strong>，在本例中作用类似于<code>#define strLength 100</code>，但是<code>const</code>比<code>define</code>好用，因为它<strong>可以指定类型，可以限定范围，可以用于指针和数组</strong>，当然我们会在后面介绍它的其他功能。</p>
+
+<p>大家可能发现了我程序中注释了一行错误代码<code>cin &gt;&gt; strRead;</code>，那么为什么这个代码是错误的呢？由于我们不能从键盘上输入空字符（\0），cin需要通过其他方式来判断我们是否输入完毕字符串，<strong>C++中cin通过空格、制表符和换行符来确定字符串结尾</strong>，那么当我们输入一串带空格的字符串时，实际上cin值读取到你第一个空格之前的内容，并将其作为字符串存入数组中<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
+
+<p>好在C++提供了很强大的类成员函数，其中包括<code>cin.getline()</code>和<code>cin.get()</code>。本次中我们用了<code>cin.getline()</code>，这个函数的作用是<strong>读取整个行，它通过识别换行符来判断字符串是否结束</strong>，并且这个函数是有参数的，第一个参数是用来存储输入行的数组名，第二个是要读取的字符数（n）。<code>cin.getline()</code>在读取到换行符或者是n-1个字符数时停止读取，至于为什么是n-1？是因为最后一个位置要留给\0。</p>
+
+<p><strong>注意:</strong><code>cin.getline()</code>利用换行符来判断字符串是否结束，在读取到换行符时，<code>cin.getline()</code>将换行符替换为空字符并储存在数组末尾。</p>
+
+<p>在介绍下一个函数<code>cin.get()</code>之前，我要提出一个问题，当我们用<code>cin</code>来读取字符串，当输入了空格时<code>cin</code>就结束存储了，那么剩下的字符到哪里了？我们用程序来说话。</p>
+
+<p>```
+// 02(1).cpp &mdash;read one string</p>
+
+<h1>include <iostream></h1>
+
+<h1>define strLength 100</h1>
+
+<p>int main()
+{</p>
+
+<pre><code>using namespace std;
+
+//const int strLength=100;
+char strRead[strLength];
+char strRead1[strLength];
+
+cout &lt;&lt; "Please input the string." &lt;&lt; endl;
+cin &gt;&gt; strRead;
+cin.getline(strRead1,strLength);
+
+cout &lt;&lt; "The string you just entered is " &lt;&lt; endl
+        &lt;&lt; strRead &lt;&lt; endl
+        &lt;&lt; strRead1 &lt;&lt; endl;
+
+return 0;
+}
+</code></pre>
+
+<p>```
+程序运行结果为：</p>
+
+<p>```
+Please input the string.
+I Love You!
+The string you just entered is
+I
+ Love You!</p>
+
+<hr />
+
+<p>(program exited with code: 0)
+Press return to continue
+```</p>
+
+<p>各位童鞋可以明显看出，在空格之后输入的部分并没有消失，它们可以被第二个函数识别并存储。这是因为我们<strong>输入的字符先被存储在系统的缓冲区</strong>，缓冲区可以理解成一个队列，程序实际读取的是这个队列中的内容。</p>
+
+<p>好了，在理解上面的知识之后，我们继续介绍<code>cin.get()</code>，实际上<code>cin.get()</code>跟<code>cin.getline()</code>非常像，只不过<code>cin.get()</code>在读取整行字符之后，不丢弃换行符，而是把它留在缓冲区之中，这意味着如果你要输入两次，第二次调用时<code>cin.get()</code>将无法识别第二次的输入，因为上一次调用后未被丢弃的换行符依旧留在缓冲区中。好在我们有办法解决这个问题，首先，当<code>cin.get()</code>不输入任何参数时<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>可读取下一个字符（不管是换行符、空格还是制表符），其次，还有一个类函数叫做<code>cin.getchar()</code>作用与前面相同，我们可以通过<code>cin.get(strRead1,strLength).get;</code>或者<code>cin.get(strRead1,strLength); cin.get();</code>来调用它们。</p>
+
+<hr />
+
+<p>以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻</p>
+
+<hr />
+
+<p><strong>作业:</strong>
+1.讲述c语言中处理空格的方法。
+2.输入以下字符串“Even now, you don&rsquo;t konw HOW MUCH I LOVE YOU”，按照原样显示，并计算其中单词数，字母数和大写字母数。</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>例如<code>sizeof(int)</code>或<code>12*8</code>。<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>注意是定义不是声明，不是声明，不是声明。忘记什么是定义什么是声明的，忘记的同学给你们一个<a href="http://ghostqu.github.io/blog/2016/02/02/c-plus-01/">传送门</a>。<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>作为字符串的意思是在最后一位加上\0。<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+<li id="fn:4">
+<p>这里用了函数的重定义。<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的C++学习笔记1]]></title>
+    <link href="http://ghostqu.github.io/blog/2016/02/02/c-plus-01/"/>
+    <updated>2016-02-02T23:57:13+08:00</updated>
+    <id>http://ghostqu.github.io/blog/2016/02/02/c-plus-01</id>
+    <content type="html"><![CDATA[<p>今天开始正式步入C++的学习中，作为学习笔记，我决定采用先定义再程序再讲解讲解的方式记录，即首先我会讲解一些概念性的问题，然后用一个程序作为实力，在对程序进行讲解。</p>
 
 <!--more-->
 
@@ -168,21 +346,21 @@ Press return to continue</p>
 
 <p>C++中格式化输出要调用I/O流控制头文件iomanip.h，以下是一些常用的格式化输出:</p>
 
-<blockquote><p>dec 置基数为10 相当于"%d"
-hex 置基数为16 相当于"%X"
-oct 置基数为8 相当于"%o"
-setfill&copy; 设填充字符为c
-setprecision(n)   设显示小数精度为n位
-setw(n) 设域宽为n个字符
-setioflags(ios::fixed)   固定的浮点显示
-setioflags(ios::scientific) 指数表示
-setiosflags(ios::left) 左对齐
-setiosflags(ios::right) 右对齐
-setiosflags(ios::skipws) 忽略前导空白
-setiosflags(ios::uppercase) 16进制数大写输出
-setiosflags(ios::lowercase) 16进制小写输出
-setiosflags(ios::showpoint) 强制显示小数点
-setiosflags(ios::showpos)   强制显示符号</p></blockquote>
+<p>|dec |置基数为10 相当于"%d"|
+|hex |置基数为16 相当于"%X"|
+|oct |置基数为8 相当于"%o"|
+|setfill&copy; |设填充字符为c|
+|setprecision(n)  | 设显示小数精度为n位|
+|setw(n) |设域宽为n个字符|
+|setioflags(ios::fixed)  | 固定的浮点显示|
+|setioflags(ios::scientific) |指数表示|
+|setiosflags(ios::left)| 左对齐|
+|setiosflags(ios::right) |右对齐|
+|setiosflags(ios::skipws) |忽略前导空白|
+|setiosflags(ios::uppercase) |16进制数大写输出|
+|setiosflags(ios::lowercase) |16进制小写输出|
+|setiosflags(ios::showpoint) |强制显示小数点|
+|setiosflags(ios::showpos)   |强制显示符号|</p>
 
 <p>C语言中的格式化输出如下：</p>
 
