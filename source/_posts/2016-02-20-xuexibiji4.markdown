@@ -1,0 +1,140 @@
+---
+layout: post
+title: "我的C++学习笔记 string类"
+date: 2016-02-20 19:08:13 +0800
+comments: true
+categories: C++
+---
+
+上一篇笔记结合输入输出介绍了数组，今天我们继续输入输出，因为程序的根本就是保证输入的准确和可视化的输出。
+
+<!--more-->
+---
+
+1.作业
+(1)如果输入一个整型变量，但是输入溢出会发生什么事情，那么我们来做一个实验。
+```
+// 03.cpp
+#include <iostream>
+
+int main()
+{
+ using namespace std;
+ int i;
+
+ cout<<"please input data:"<<endl;
+ cin>>i;
+ 
+ cout<<"The data is："<<endl;
+ cout<<i<<endl;
+
+ return 0;
+}
+```
+那么我们来看看输出结果：
+```
+please input data:
+65537
+The data is：
+65537
+请按任意键继续. . .
+```
+看到这里肯定有童靴说了，哇，竟然没有溢出，好厉害好厉害。当然我一开始也是这么想的，但是大家要注意一个问题，就是整型不一定就是两字节的，它会根据编译器和编译环境的不同而不同，我们可以通过调用库函数，或者查看底层的方式获取这些数据类型长度的信息，这里暂时不做介绍。那么为了保证实验的准确性，我们再输入一次。
+
+```
+please input data:
+10000000000000000000000000000
+The data is：
+-858993460
+请按任意键继续. . .
+```
+大家看到了数据还是溢出了，只不过因为我的编译环境的问题，我的int不是两字节的，当数据溢出时，本来是正数的数据因为强制进位导致标志位变为1，因此变为负数的最大值。
+
+2.太简单了，本宝宝不做
+
+---
+
+2.定义及程序
+
+愉快并且任性的结束了作业部分，本宝宝又要快乐的给大家讲定义了，鉴于本宝宝今天在上午下雨下午下雪的情况下练了一天车，现在已经冻得意思模糊了，宝宝心里苦，宝宝不说，因此，今天的定义就和程序结合在一起讲解。
+
+string类
+
+这是IOS/ANSI　C++98标准中扩展的C++库，它的主要作用就是代替char型数组来储存字符串，本质上它减少了程序员对于数组定义的工作，但是又能通过类来实现数组该有的功能。
+
+废话不多说，上例程：
+
+```
+// 03.cpp
+#include <iostream>
+#include <string>
+
+int main()
+{
+ using namespace std;
+
+ char asArray[20];
+ string asString,asString1;
+
+
+ cout<<"please input string store as array:"<<endl;
+ cin>>asArray;
+ 
+ cout<<"please input string store as string:"<<endl;
+ cin>>asString;
+
+ asString1=asString;
+
+ cout<<"The array is："<<endl;
+ cout<<asArray<<endl;
+
+ cout<<"The string is："<<endl;
+ cout<<asString1<<endl;
+
+ cout<<"The third letter of array is："<<endl;
+ cout<<asArray[2]<<endl;
+
+ cout<<"The third letter of string is："<<endl;
+ cout<<asString1[2]<<endl;
+ return 0;
+}
+```
+输出结果如下
+```
+please input string store as array:
+thing
+please input string store as string:
+some
+The array is：
+thing
+The string is：
+some
+The third letter of array is：
+i
+The third letter of string is：
+m
+请按任意键继续. . .
+```
+用起来是不是跟数组很相似呢？同样都是可以用数组的方式单独输出某一个字符。但是大家注意一点，在这个程序中string类是可以相互赋值的，这个是数组做不到的，同样当你定义string类时，你不需要像数组那样预先定义好长度，这就是string类的优势。
+
+那么当我们使用string类时有什么要注意的呢？
+
+首先，当你使用string类时一定要调用相应头文件，即`#include <string>`。而string类位于名称空间std中，因此我们必须使用一个`using namespace std;`编译指令或者使用`std::string`来引用它。
+
+其次，当我们使用string类时，我们不管可以让两个string类相互赋值，还可以相加，即`string3=string2+string1；`，这相当于将两个字符串合并起来，即字符串2后面接上字符串1，同理也可以使用+=。
+
+最后给出两个用来测量字符串和数组长度的函数及使用方法：
+
+```
+int lenString = asString.size();
+int lenAaary = strlen(asArray);
+```
+
+---
+以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻
+
+---
+作业：
+
+1.使用C的方式，即数组，合并两个字符串，并测量字符串长度。
+2.修改上次作业中的错误，让程序能够识别任意一段没有换行符的字符串，我可能会摘录一段莎士比亚文选，请做好准备。
