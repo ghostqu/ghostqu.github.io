@@ -1,0 +1,389 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>我的C++学习笔记 string类 - 曲奕帆ghost</title>
+	<meta name="author" content="ghostQu">
+
+	
+	<meta name="description" content="我的C++学习笔记 String类 上一篇笔记结合输入输出介绍了数组，今天我们继续输入输出，因为程序的根本就是保证输入的准确和可视化的输出。 1.作业
+(1)如果输入一个整型变量，但是输入溢出会发生什么事情，那么我们来做一个实验。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="曲奕帆ghost" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://ghostqu.github.io/blog/2016/02/20/xuexibiji4/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<img src="/images/avatar.jpg" alt="Profile Picture" style="width: 160px;" />
+	
+</div>
+<hgroup>
+  <h1><a href="/">曲奕帆ghost</a></h1>
+  
+    <h3>Ever learning, never end.</h3>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">首页</a></li>
+    
+    <li><a href="/blog/archives">所有文章</a></li>
+
+    <li><a href="http://about.me/shashankmehta">关于我</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:ghostqu0@gmail.com" title="Email">Email</a>
+		
+		
+		
+		
+		
+			<a class="github" href="https://github.com/ghostqu" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+<p class="subtitle">那美好的仗我打完了，应守的道我守住了，当尽的路我行尽了，从此自有正义的冠冕长存。</p>
+<p style="text-align: right;" class="subtitle"> ——《新约· 提摩太后书》</p>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">我的C++学习笔记 String类</h1>
+	<div class="entry-content" itemprop="articleBody"><p>上一篇笔记结合输入输出介绍了数组，今天我们继续输入输出，因为程序的根本就是保证输入的准确和可视化的输出。</p>
+
+<!--more-->
+
+
+<hr />
+
+<p>1.作业
+(1)如果输入一个整型变量，但是输入溢出会发生什么事情，那么我们来做一个实验。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 03.cpp
+</span><span class='line'>#include &lt;iostream&gt;
+</span><span class='line'>
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'> using namespace std;
+</span><span class='line'> int i;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"please input data:"&lt;&lt;endl;
+</span><span class='line'> cin&gt;&gt;i;
+</span><span class='line'> 
+</span><span class='line'> cout&lt;&lt;"The data is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;i&lt;&lt;endl;
+</span><span class='line'>
+</span><span class='line'> return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>那么我们来看看输出结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>please input data:
+</span><span class='line'>65537
+</span><span class='line'>The data is：
+</span><span class='line'>65537
+</span><span class='line'>请按任意键继续. . .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看到这里肯定有童靴说了，哇，竟然没有溢出，好厉害好厉害。当然我一开始也是这么想的，但是大家要注意一个问题，就是整型不一定就是两字节的，它会根据编译器和编译环境的不同而不同，我们可以通过调用库函数，或者查看底层的方式获取这些数据类型长度的信息，这里暂时不做介绍。那么为了保证实验的准确性，我们再输入一次。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>please input data:
+</span><span class='line'>10000000000000000000000000000
+</span><span class='line'>The data is：
+</span><span class='line'>-858993460
+</span><span class='line'>请按任意键继续. . .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>大家看到了数据还是溢出了，只不过因为我的编译环境的问题，我的int不是两字节的，当数据溢出时，本来是正数的数据因为强制进位导致标志位变为1，因此变为负数的最大值。</p>
+
+<p>2.太简单了，本宝宝不做</p>
+
+<hr />
+
+<p>2.定义及程序</p>
+
+<p>愉快并且任性的结束了作业部分，本宝宝又要快乐的给大家讲定义了，鉴于本宝宝今天在上午下雨下午下雪的情况下练了一天车，现在已经冻得意思模糊了，宝宝心里苦，宝宝不说，因此，今天的定义就和程序结合在一起讲解。</p>
+
+<p>string类</p>
+
+<p>这是IOS/ANSI　C++98标准中扩展的C++库，它的主要作用就是代替char型数组来储存字符串，本质上它减少了程序员对于数组定义的工作，但是又能通过类来实现数组该有的功能。</p>
+
+<p>废话不多说，上例程：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 03.cpp
+</span><span class='line'>#include &lt;iostream&gt;
+</span><span class='line'>#include &lt;string&gt;
+</span><span class='line'>
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'> using namespace std;
+</span><span class='line'>
+</span><span class='line'> char asArray[20];
+</span><span class='line'> string asString,asString1;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"please input string store as array:"&lt;&lt;endl;
+</span><span class='line'> cin&gt;&gt;asArray;
+</span><span class='line'> 
+</span><span class='line'> cout&lt;&lt;"please input string store as string:"&lt;&lt;endl;
+</span><span class='line'> cin&gt;&gt;asString;
+</span><span class='line'>
+</span><span class='line'> asString1=asString;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"The array is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;asArray&lt;&lt;endl;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"The string is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;asString1&lt;&lt;endl;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"The third letter of array is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;asArray[2]&lt;&lt;endl;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"The third letter of string is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;asString1[2]&lt;&lt;endl;
+</span><span class='line'> return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出结果如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>please input string store as array:
+</span><span class='line'>thing
+</span><span class='line'>please input string store as string:
+</span><span class='line'>some
+</span><span class='line'>The array is：
+</span><span class='line'>thing
+</span><span class='line'>The string is：
+</span><span class='line'>some
+</span><span class='line'>The third letter of array is：
+</span><span class='line'>i
+</span><span class='line'>The third letter of string is：
+</span><span class='line'>m
+</span><span class='line'>请按任意键继续. . .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用起来是不是跟数组很相似呢？同样都是可以用数组的方式单独输出某一个字符。但是大家注意一点，在这个程序中string类是可以相互赋值的，这个是数组做不到的，同样当你定义string类时，你不需要像数组那样预先定义好长度，这就是string类的优势。</p>
+
+<p>那么当我们使用string类时有什么要注意的呢？</p>
+
+<p>首先，当你使用string类时一定要调用相应头文件，即<code>#include &lt;string&gt;</code>。而string类位于名称空间std中，因此我们必须使用一个<code>using namespace std;</code>编译指令或者使用<code>std::string</code>来引用它。</p>
+
+<p>其次，当我们使用string类时，我们不管可以让两个string类相互赋值，还可以相加，即<code>string3=string2+string1；</code>，这相当于将两个字符串合并起来，即字符串2后面接上字符串1，同理也可以使用+=。</p>
+
+<p>最后给出两个用来测量字符串和数组长度的函数及使用方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int lenString = asString.size();
+</span><span class='line'>int lenAaary = strlen(asArray);</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻</p>
+
+<hr />
+
+<p>作业：</p>
+
+<p>1.使用C的方式，即数组，合并两个字符串，并测量字符串长度。
+2.修改上次作业中的错误，让程序能够识别任意一段没有换行符的字符串，我可能会摘录一段莎士比亚文选，请做好准备。</p>
+</div>
+
+</article>
+<!--
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+-->
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ghostqu"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2016
+
+    ghostQu
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	<script src="/javascripts/slash.js"></script>
+	
+
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

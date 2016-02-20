@@ -4,7 +4,7 @@
   <title><![CDATA[曲奕帆ghost]]></title>
   <link href="http://ghostqu.github.io/atom.xml" rel="self"/>
   <link href="http://ghostqu.github.io/"/>
-  <updated>2016-02-04T23:20:35+08:00</updated>
+  <updated>2016-02-20T19:12:40+08:00</updated>
   <id>http://ghostqu.github.io/</id>
   <author>
     <name><![CDATA[ghostQu]]></name>
@@ -12,6 +12,546 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ 我的C++学习笔记 结构与共同体]]></title>
+    <link href="http://ghostqu.github.io/blog/2016/02/20/cuexibiji3/"/>
+    <updated>2016-02-20T19:10:23+08:00</updated>
+    <id>http://ghostqu.github.io/blog/2016/02/20/cuexibiji3</id>
+    <content type="html"><![CDATA[<p>在此前我们我们介绍了string类的使用方法，今天我们继续介绍其他数据类型，结构和共同体。</p>
+
+<!--more-->
+
+
+<hr />
+
+<h3>1.定义</h3>
+
+<p><strong>结构</strong>关键字为<code>struct</code>，主要用于<strong>存储<em>多个</em>不同类型变量</strong>的不同信息，注意这里的多个，这个是跟共同体的主要区别。举例说明，假如我们居委会要做一个附近人口信息表，表内包括姓名，年龄和身份证后四位，如果按照一般的方法我们要准备一个二维数组或者字符串数组和两个<code>int</code>数组，然而三个数组背后意味着修改查询信息的不方便，我们希望所有的信息能够存储到一起，那么<code>struct</code>可以做到这一切，同时<code>struct</code>也为之后的类打下了基础。</p>
+
+<p>结构的定义方法如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct 结构名
+</span><span class='line'>{
+</span><span class='line'> //成员列表
+</span><span class='line'>}；</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上面那个人口信息为例如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct peopleInfor
+</span><span class='line'>{
+</span><span class='line'>char name[20];
+</span><span class='line'>int age;
+</span><span class='line'>int id;
+</span><span class='line'>}；</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但是需要注意一点，这里只是对<code>peopleInfor</code>这个结构类型进行定义，而不是声明了某个变量<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。那么我们还要声明变量才能够使用，值得一提的是，在C++中结构变量声明时可以省略<code>struct</code>关键字并且可以声明结构数组，即以下两种声明方法都没有问题。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct peopleInfor infoData[20];
+</span><span class='line'>peopleInfor inforData[20]</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>共用体</strong>是一种数据格式，关键字为<code>union</code>，它能够<strong>储存不同变量类型的一个信息</strong>，即不同于一个结构中可以包含多个信息，一个共用体中只能包含一个信息，只不过这个信息可以以不同的数据类型来储存。举例来说当我们用共用体来存储身份证后四位时，我们可以选择是以字符串类型存储还是以整型类型存储，这样能极大的节省内存。</p>
+
+<p>其定义方式如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>union idInfor
+</span><span class='line'>{
+</span><span class='line'> int intId;
+</span><span class='line'> char charID[20]
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当然，这个只是定义数据类型，我们还是要声明变量的，但是如下的声明方法在C++中同样适用，这表明我们在定义的同时声明了一个名为id的变量。值得一提的是，重复给共同体中两个类型赋值，只会保留最后输入的值和类型。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>union idInfor
+</span><span class='line'>{
+</span><span class='line'> int intId;
+</span><span class='line'> char charID[20]；
+</span><span class='line'>}id;</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h3>2.程序及解析</h3>
+
+<p>列出一个附近居民的信息表，包括姓名，年龄和身份证后四位，要求初始化两组，输入第三组，并且输出第一个人的姓名，第二人年龄和第三人的后四位。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//04.cpp struct and union
+</span><span class='line'>#include &lt;iostream&gt;
+</span><span class='line'>#include &lt;string&gt;
+</span><span class='line'>
+</span><span class='line'>struct familyMember
+</span><span class='line'>{
+</span><span class='line'>  std::string name;
+</span><span class='line'>  int age;
+</span><span class='line'>   union idInfor
+</span><span class='line'>     {
+</span><span class='line'>      int intId;
+</span><span class='line'>      char charID[20];
+</span><span class='line'>     }id;
+</span><span class='line'>  };
+</span><span class='line'>  
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'>  using namespace std;
+</span><span class='line'>  
+</span><span class='line'>  familyMember fB[3] = 
+</span><span class='line'>  {
+</span><span class='line'>      {"Mr.Q",
+</span><span class='line'>          24,
+</span><span class='line'>          1314},
+</span><span class='line'>          
+</span><span class='line'>      {"Miss.Y",
+</span><span class='line'>          22,
+</span><span class='line'>          9716}
+</span><span class='line'>      };
+</span><span class='line'>      
+</span><span class='line'>      cout&lt;&lt;"Please input the third member's name"&lt;&lt;endl;
+</span><span class='line'>      cin&gt;&gt; fB[2].name;
+</span><span class='line'>      
+</span><span class='line'>      cout&lt;&lt;"Please input the third member's age"&lt;&lt;endl;
+</span><span class='line'>      cin&gt;&gt; fB[2].age;
+</span><span class='line'>      
+</span><span class='line'>      cout&lt;&lt;"Please input the third member's id"&lt;&lt;endl;
+</span><span class='line'>      cin&gt;&gt; fB[2].id.charID;
+</span><span class='line'>      
+</span><span class='line'>      cout&lt;&lt;"the first person is "&lt;&lt;fB[0].name
+</span><span class='line'>          &lt;&lt;" and the second's age is "&lt;&lt;fB[1].age
+</span><span class='line'>          &lt;&lt;" ,the the third's id is "&lt;&lt;fB[2].id.charID&lt;&lt;endl;
+</span><span class='line'>      
+</span><span class='line'>  
+</span><span class='line'>  return 0;
+</span><span class='line'>  }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>程序运行结果如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Please input the third member's name
+</span><span class='line'>Baby.Q
+</span><span class='line'>Please input the third member's age
+</span><span class='line'>2
+</span><span class='line'>Please input the third member's id
+</span><span class='line'>12XX
+</span><span class='line'>the first person is Mr.Q and the second's age is 22 ,the the third's id is 12XX
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>------------------
+</span><span class='line'>(program exited with code: 0)
+</span><span class='line'>Press return to continue
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里注意几个问题，首先，我们可以像初始化数组一样初始化结构。其次，我们可以用成员运算符<code>.</code>来访问结构中的各个成员，这种方法在日后的类中会经常使用的。
+最后，我们要讨论一下共用体初始化的规则，先上程序。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//04.cpp struct and union
+</span><span class='line'>#include &lt;iostream&gt;
+</span><span class='line'>#include &lt;string&gt;
+</span><span class='line'>
+</span><span class='line'>union idInfor
+</span><span class='line'>   {
+</span><span class='line'>     int intId;
+</span><span class='line'>     char charID;
+</span><span class='line'>   };
+</span><span class='line'>
+</span><span class='line'>  
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'>  using namespace std;
+</span><span class='line'>  
+</span><span class='line'>   idInfor id={123};
+</span><span class='line'>   
+</span><span class='line'>   cout&lt;&lt;id.intId&lt;&lt;endl;
+</span><span class='line'>   cout&lt;&lt;id.charID&lt;&lt;endl;
+</span><span class='line'>   
+</span><span class='line'>   idInfor id2={.charID='0'};
+</span><span class='line'>    
+</span><span class='line'>   cout&lt;&lt;id2.charID&lt;&lt;endl;
+</span><span class='line'>   
+</span><span class='line'>   id2=id;
+</span><span class='line'>   
+</span><span class='line'>   cout&lt;&lt;id2.intId&lt;&lt;endl;
+</span><span class='line'>  
+</span><span class='line'>  return 0;
+</span><span class='line'>  }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行结果如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>123
+</span><span class='line'>{
+</span><span class='line'>0
+</span><span class='line'>123
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>------------------
+</span><span class='line'>(program exited with code: 0)
+</span><span class='line'>Press return to continue</span></code></pre></td></tr></table></div></figure>
+
+
+<p>由此可得出共用体的几个规则
+（1）同一个内存段可以用来存放几种不同类型的成员，但是在每一瞬间只能存放其中的一种，而不是同时存放几种。换句话说，每一瞬间只有一个成员起作用，其他的成员不起作用，即不是同时都在存在和起作用。共用体变量中起作用的成员是最后一次存放的成员，在存入一个新成员后，原有成员就失去作用。
+（2）共用体可以以类似<code>idInfor id={123};</code>或类似<code>idInfor id2={.charID='0'};</code>的方法初始化，只不过第一个方法是初始化默认类型，即第一个类型，而第二种方法可以初始化指定类型。</p>
+
+<hr />
+
+<p>以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>即<code>peopleInfor</code>本身是像<code>int</code>这样的数据类型，而不是我们声明的变量。<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的C++学习笔记 string类]]></title>
+    <link href="http://ghostqu.github.io/blog/2016/02/20/xuexibiji4/"/>
+    <updated>2016-02-20T19:08:13+08:00</updated>
+    <id>http://ghostqu.github.io/blog/2016/02/20/xuexibiji4</id>
+    <content type="html"><![CDATA[<p>上一篇笔记结合输入输出介绍了数组，今天我们继续输入输出，因为程序的根本就是保证输入的准确和可视化的输出。</p>
+
+<!--more-->
+
+
+<hr />
+
+<p>1.作业
+(1)如果输入一个整型变量，但是输入溢出会发生什么事情，那么我们来做一个实验。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 03.cpp
+</span><span class='line'>#include &lt;iostream&gt;
+</span><span class='line'>
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'> using namespace std;
+</span><span class='line'> int i;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"please input data:"&lt;&lt;endl;
+</span><span class='line'> cin&gt;&gt;i;
+</span><span class='line'> 
+</span><span class='line'> cout&lt;&lt;"The data is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;i&lt;&lt;endl;
+</span><span class='line'>
+</span><span class='line'> return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>那么我们来看看输出结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>please input data:
+</span><span class='line'>65537
+</span><span class='line'>The data is：
+</span><span class='line'>65537
+</span><span class='line'>请按任意键继续. . .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看到这里肯定有童靴说了，哇，竟然没有溢出，好厉害好厉害。当然我一开始也是这么想的，但是大家要注意一个问题，就是整型不一定就是两字节的，它会根据编译器和编译环境的不同而不同，我们可以通过调用库函数，或者查看底层的方式获取这些数据类型长度的信息，这里暂时不做介绍。那么为了保证实验的准确性，我们再输入一次。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>please input data:
+</span><span class='line'>10000000000000000000000000000
+</span><span class='line'>The data is：
+</span><span class='line'>-858993460
+</span><span class='line'>请按任意键继续. . .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>大家看到了数据还是溢出了，只不过因为我的编译环境的问题，我的int不是两字节的，当数据溢出时，本来是正数的数据因为强制进位导致标志位变为1，因此变为负数的最大值。</p>
+
+<p>2.太简单了，本宝宝不做</p>
+
+<hr />
+
+<p>2.定义及程序</p>
+
+<p>愉快并且任性的结束了作业部分，本宝宝又要快乐的给大家讲定义了，鉴于本宝宝今天在上午下雨下午下雪的情况下练了一天车，现在已经冻得意思模糊了，宝宝心里苦，宝宝不说，因此，今天的定义就和程序结合在一起讲解。</p>
+
+<p>string类</p>
+
+<p>这是IOS/ANSI　C++98标准中扩展的C++库，它的主要作用就是代替char型数组来储存字符串，本质上它减少了程序员对于数组定义的工作，但是又能通过类来实现数组该有的功能。</p>
+
+<p>废话不多说，上例程：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 03.cpp
+</span><span class='line'>#include &lt;iostream&gt;
+</span><span class='line'>#include &lt;string&gt;
+</span><span class='line'>
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'> using namespace std;
+</span><span class='line'>
+</span><span class='line'> char asArray[20];
+</span><span class='line'> string asString,asString1;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"please input string store as array:"&lt;&lt;endl;
+</span><span class='line'> cin&gt;&gt;asArray;
+</span><span class='line'> 
+</span><span class='line'> cout&lt;&lt;"please input string store as string:"&lt;&lt;endl;
+</span><span class='line'> cin&gt;&gt;asString;
+</span><span class='line'>
+</span><span class='line'> asString1=asString;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"The array is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;asArray&lt;&lt;endl;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"The string is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;asString1&lt;&lt;endl;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"The third letter of array is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;asArray[2]&lt;&lt;endl;
+</span><span class='line'>
+</span><span class='line'> cout&lt;&lt;"The third letter of string is："&lt;&lt;endl;
+</span><span class='line'> cout&lt;&lt;asString1[2]&lt;&lt;endl;
+</span><span class='line'> return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出结果如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>please input string store as array:
+</span><span class='line'>thing
+</span><span class='line'>please input string store as string:
+</span><span class='line'>some
+</span><span class='line'>The array is：
+</span><span class='line'>thing
+</span><span class='line'>The string is：
+</span><span class='line'>some
+</span><span class='line'>The third letter of array is：
+</span><span class='line'>i
+</span><span class='line'>The third letter of string is：
+</span><span class='line'>m
+</span><span class='line'>请按任意键继续. . .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用起来是不是跟数组很相似呢？同样都是可以用数组的方式单独输出某一个字符。但是大家注意一点，在这个程序中string类是可以相互赋值的，这个是数组做不到的，同样当你定义string类时，你不需要像数组那样预先定义好长度，这就是string类的优势。</p>
+
+<p>那么当我们使用string类时有什么要注意的呢？</p>
+
+<p>首先，当你使用string类时一定要调用相应头文件，即<code>#include &lt;string&gt;</code>。而string类位于名称空间std中，因此我们必须使用一个<code>using namespace std;</code>编译指令或者使用<code>std::string</code>来引用它。</p>
+
+<p>其次，当我们使用string类时，我们不管可以让两个string类相互赋值，还可以相加，即<code>string3=string2+string1；</code>，这相当于将两个字符串合并起来，即字符串2后面接上字符串1，同理也可以使用+=。</p>
+
+<p>最后给出两个用来测量字符串和数组长度的函数及使用方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int lenString = asString.size();
+</span><span class='line'>int lenAaary = strlen(asArray);</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻</p>
+
+<hr />
+
+<p>作业：</p>
+
+<p>1.使用C的方式，即数组，合并两个字符串，并测量字符串长度。
+2.修改上次作业中的错误，让程序能够识别任意一段没有换行符的字符串，我可能会摘录一段莎士比亚文选，请做好准备。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我的C++学习笔记2]]></title>
