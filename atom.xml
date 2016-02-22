@@ -4,7 +4,7 @@
   <title><![CDATA[曲奕帆ghost]]></title>
   <link href="http://ghostqu.github.io/atom.xml" rel="self"/>
   <link href="http://ghostqu.github.io/"/>
-  <updated>2016-02-20T19:12:40+08:00</updated>
+  <updated>2016-02-22T22:27:05+08:00</updated>
   <id>http://ghostqu.github.io/</id>
   <author>
     <name><![CDATA[ghostQu]]></name>
@@ -12,6 +12,278 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我的C++学习笔记5 指针 ]]></title>
+    <link href="http://ghostqu.github.io/blog/2016/02/22/xue-xi-bi-ji-5/"/>
+    <updated>2016-02-22T22:26:07+08:00</updated>
+    <id>http://ghostqu.github.io/blog/2016/02/22/xue-xi-bi-ji-5</id>
+    <content type="html"><![CDATA[<p>其实具体的数据类型我们还有枚举，布尔和位还没有讲，但是这些对于我们这些初学者很少用到，因此今天我决定直接跳到指针。</p>
+
+<!--more-->
+
+
+<hr />
+
+<h3>1.定义</h3>
+
+<p><strong>指针</strong>是一个变量，其储存的数据是变量的地址，而不是想要赋给变量的值。指针的意义在C/C++中十分重大，基本上而言，指针体现出了C/C++的灵活性，说指针是C/C++的灵魂也不为过。</p>
+
+<p><strong><code>*</code>运算符</strong>被成为间接值或者解除引用运算符，将其应用于指针可得到该地址处储存的值。</p>
+
+<p><strong><code>&amp;</code>运算符</strong>取址运算符，将其用于变量可得变量在内存中的实际地址。</p>
+
+<p>那么我们声明和初始化指针的方法如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int* pointer;
+</span><span class='line'>int *pointer=&data;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里注意<strong>两个</strong>问题，第一，<code>*</code>运算符放的位置，理论上对编译器而言上述两个位置没有区别，甚至如果你喜欢你也可以在两边都加上空格<code>int * pointer;</code>但是，实际上<code>int*</code>是一种类型，指向<code>int</code>的指针，但是需要注意的是当声明多个指针时，不管<code>*</code>放在哪里，每一个声明为指针的变量前必须要加一个<code>*</code>运算符。例如<code>int* pointer1, *pointer2;</code>另外<strong>指针本身也是有类型的,</strong>如果是基于<code>int</code>型的指针，就不能赋予<code>double</code>型的地址。</p>
+
+<p>第二，我们在初始化指针时，用到了<code>int *pointer=&amp;data;</code>的语句，需要注意的是它并不是把<code>data</code>的地址赋给<code>*pointer</code>而是赋给<code>pointer</code>，所以如果当你不是用这中方法初始化指针，而是想要给指针赋值请记得是<code>pointer=&amp;data;</code>而不是<code>*pointer=&amp;data;</code>。</p>
+
+<p><strong>警告：</strong>使用指针时需要注意，不要在没有初始化的情况下给指针指向的内存赋值，会带来不可预计的后果。一定要在指针使用<code>*</code>运算符之前将指针初始化成一个确定、适当的地址。</p>
+
+<p><strong><code>new</code>运算符</strong>，类似于C语言中的<code>malloc()</code>函数，其作用为分配未命名的内存用于存储。举个例子，当我们没有<code>new</code>之前，我们要想声明一个不确定长度的数组是不可能的，因为我们不能用类似<code>cin&gt;&gt;i; int a[i];</code>这样的方式声明数组，在我们涉及数组的笔记中明确提及，数组声明时必须为固定长度，可是如果我们能在程序的运行阶段分配内存那么问题就迎刃而解了。</p>
+
+<p>使用方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *prt = new int;
+</span><span class='line'>int *prt = new int [10];</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong><code>delete</code>运算符</strong>用于释放<code>new</code>运算符申请的内存，使内存能被其他程序所使用。<strong>另外<code>delete</code>不删除指针本身。</strong></p>
+
+<p>使用方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *prt = new int;
+</span><span class='line'>...
+</span><span class='line'>delete prt;
+</span><span class='line'>
+</span><span class='line'>int *prt = new int [10];
+</span><span class='line'>...
+</span><span class='line'>delete [] prt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>注意：</strong>使用以上两个运算符需要遵守以下规则
+  1.不要使用delete释放不是new分配的内存。
+  2.不要重复释放同一内存。
+  3.如果使用new []要使用delete[]。
+  4.可以对空指针使用delete。</p>
+
+<hr />
+
+<h3>2.程序及解析</h3>
+
+<p>创建一个可定义长度数组并输入输出数据。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//05.cpp pointer new delete
+</span><span class='line'>#include &lt;iostream&gt;
+</span><span class='line'>#include &lt;string&gt;
+</span><span class='line'>  
+</span><span class='line'>int main()
+</span><span class='line'>{
+</span><span class='line'>  using namespace std;
+</span><span class='line'>  
+</span><span class='line'>    char * p_char;
+</span><span class='line'>    int i,j;
+</span><span class='line'>     
+</span><span class='line'>    cout&lt;&lt;"please input the length of array:"&lt;&lt;endl;
+</span><span class='line'>    cin  &gt;&gt; i;
+</span><span class='line'>     
+</span><span class='line'>     p_char = new char [i];
+</span><span class='line'>    
+</span><span class='line'>    for(j=0;j&lt;i;j++)
+</span><span class='line'>    {
+</span><span class='line'>    cout&lt;&lt;"now you can input the "&lt;&lt; j+1 &lt;&lt;"th data"&lt;&lt;endl;
+</span><span class='line'>    cin&gt;&gt;*(p_char+j);
+</span><span class='line'>    }
+</span><span class='line'>    
+</span><span class='line'>    cout&lt;&lt;"the data you input is ";
+</span><span class='line'>    
+</span><span class='line'>    for(int j=0;j&lt;i;j++)
+</span><span class='line'>   {
+</span><span class='line'>    cout&lt;&lt; *(p_char+j); 
+</span><span class='line'>    }
+</span><span class='line'>    
+</span><span class='line'>   delete  [] p_char;
+</span><span class='line'>  
+</span><span class='line'>   return 0;
+</span><span class='line'>  }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>程序运行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>please input the length of array:
+</span><span class='line'>4
+</span><span class='line'>now you can input the 1th data
+</span><span class='line'>l
+</span><span class='line'>now you can input the 2th data
+</span><span class='line'>o
+</span><span class='line'>now you can input the 3th data
+</span><span class='line'>v
+</span><span class='line'>now you can input the 4th data
+</span><span class='line'>e
+</span><span class='line'>the data you input is love
+</span><span class='line'>
+</span><span class='line'>------------------
+</span><span class='line'>(program exited with code: 0)
+</span><span class='line'>Press return to continue</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解析：这里发现了几个好玩的问题，首先，当我们用new为一个数组分配内存时，原有的指针被可以<strong>作为数组名</strong>来使用，本例中也可以通过<code>p_char[2]</code>来调用第三个元素，当然本身指针的功能也没有消失，我们依旧可以通过指针自加来改变指针指向来更改数组数据。</p>
+
+<p>其次，我先给大家上一个错误实例</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> int main()
+</span><span class='line'>  {
+</span><span class='line'>   .......
+</span><span class='line'>    for(int j=0;j&lt;i;j++)
+</span><span class='line'>   {
+</span><span class='line'>    cout&lt;&lt; *(p_char); 
+</span><span class='line'>    p_char++;
+</span><span class='line'>    }
+</span><span class='line'>    
+</span><span class='line'>   delete  [] p_char;
+</span><span class='line'>   ......
+</span><span class='line'>   }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行结果如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>please input the length of array:
+</span><span class='line'>4
+</span><span class='line'>now you can input the 1th data
+</span><span class='line'>l
+</span><span class='line'>now you can input the 2th data
+</span><span class='line'>o
+</span><span class='line'>now you can input the 3th data
+</span><span class='line'>v
+</span><span class='line'>now you can input the 4th data
+</span><span class='line'>e
+</span><span class='line'>*** Error in `./04': free(): invalid pointer: 0x00000000015e0014 ***
+</span><span class='line'>the data you input is loveAborted (core dumped)
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>------------------
+</span><span class='line'>(program exited with code: 134)
+</span><span class='line'>Press return to continue</span></code></pre></td></tr></table></div></figure>
+
+
+<p>显示无效指针了，因为我在输出数据时改变指针值了。所以我们需要注意一点当我们需要释放内存时，需要检查是否是我们new申请的地址。这在数组中是一个经常会犯的错误，需要大家注意。</p>
+
+<hr />
+
+<h3>3.作业</h3>
+
+<p>先是回答上期的作业
+1.取决于计算机cpu字长16位计算机一次最大能处理2<sup>15</sup>的数据，但是这个问题本身没有意义，因为即便字长偏小也可以采用16位模拟32位的方法进行超字节运算。
+2.可以通过自增自减的前后顺序调整值在调用前自增或自减，但是容易引起混乱，开个<a href="http://bbs.csdn.net/topics/370153775">传送门</a>可以借鉴一下。</p>
+
+<p>布置作业</p>
+
+<p>采用malloc()函数编写一个变长数组，输入</p>
+
+<blockquote><p>If you were the lion, the fox will deceive you; if you were the lamb, the fox could come to eat you.</p></blockquote>
+
+<p>输出并统计字数。</p>
+
+<hr />
+
+<p>以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ 我的C++学习笔记 结构与共同体]]></title>
