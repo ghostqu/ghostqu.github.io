@@ -1,0 +1,176 @@
+---
+layout: post
+title: "我的C++学习笔记5 指针 "
+date: 2016-02-22 22:26:07 +0800
+comments: true
+categories: C++
+---
+
+其实具体的数据类型我们还有枚举，布尔和位还没有讲，但是这些对于我们这些初学者很少用到，因此今天我决定直接跳到指针。
+<!--more-->
+---
+###1.定义
+
+**指针**是一个变量，其储存的数据是变量的地址，而不是想要赋给变量的值。指针的意义在C/C++中十分重大，基本上而言，指针体现出了C/C++的灵活性，说指针是C/C++的灵魂也不为过。
+
+**`*`运算符**被成为间接值或者解除引用运算符，将其应用于指针可得到该地址处储存的值。
+
+**`&`运算符**取址运算符，将其用于变量可得变量在内存中的实际地址。
+
+那么我们声明和初始化指针的方法如下：
+
+```
+int* pointer;
+int *pointer=&data;
+```
+这里注意**两个**问题，第一，`*`运算符放的位置，理论上对编译器而言上述两个位置没有区别，甚至如果你喜欢你也可以在两边都加上空格`int * pointer;`但是，实际上`int*`是一种类型，指向`int`的指针，但是需要注意的是当声明多个指针时，不管`*`放在哪里，每一个声明为指针的变量前必须要加一个`*`运算符。例如`int* pointer1, *pointer2;`另外**指针本身也是有类型的,**如果是基于`int`型的指针，就不能赋予`double`型的地址。
+
+第二，我们在初始化指针时，用到了`int *pointer=&data;`的语句，需要注意的是它并不是把`data`的地址赋给`*pointer`而是赋给`pointer`，所以如果当你不是用这中方法初始化指针，而是想要给指针赋值请记得是`pointer=&data;`而不是`*pointer=&data;`。
+
+**警告：**使用指针时需要注意，不要在没有初始化的情况下给指针指向的内存赋值，会带来不可预计的后果。一定要在指针使用`*`运算符之前将指针初始化成一个确定、适当的地址。
+
+**`new`运算符**，类似于C语言中的`malloc()`函数，其作用为分配未命名的内存用于存储。举个例子，当我们没有`new`之前，我们要想声明一个不确定长度的数组是不可能的，因为我们不能用类似`cin>>i; int a[i];`这样的方式声明数组，在我们涉及数组的笔记中明确提及，数组声明时必须为固定长度，可是如果我们能在程序的运行阶段分配内存那么问题就迎刃而解了。
+
+使用方法：
+```
+int *prt = new int;
+int *prt = new int [10];
+```
+
+**`delete`运算符**用于释放`new`运算符申请的内存，使内存能被其他程序所使用。**另外`delete`不删除指针本身。**
+
+使用方法：
+
+```
+int *prt = new int;
+...
+delete prt;
+
+int *prt = new int [10];
+...
+delete [] prt;
+
+```
+**注意：**使用以上两个运算符需要遵守以下规则
+  1.不要使用delete释放不是new分配的内存。
+  2.不要重复释放同一内存。
+  3.如果使用new []要使用delete[]。
+  4.可以对空指针使用delete。
+  
+---
+###2.程序及解析
+
+创建一个可定义长度数组并输入输出数据。
+
+```
+//05.cpp pointer new delete
+#include <iostream>
+#include <string>
+	
+int main()
+{
+	using namespace std;
+	
+    char * p_char;
+    int i,j;
+     
+    cout<<"please input the length of array:"<<endl;
+    cin  >> i;
+     
+     p_char = new char [i];
+    
+    for(j=0;j<i;j++)
+    {
+    cout<<"now you can input the "<< j+1 <<"th data"<<endl;
+    cin>>*(p_char+j);
+    }
+    
+    cout<<"the data you input is ";
+    
+    for(int j=0;j<i;j++)
+   {
+    cout<< *(p_char+j); 
+    }
+    
+   delete  [] p_char;
+	
+   return 0;
+	}
+
+```
+程序运行结果：
+```
+please input the length of array:
+4
+now you can input the 1th data
+l
+now you can input the 2th data
+o
+now you can input the 3th data
+v
+now you can input the 4th data
+e
+the data you input is love
+
+------------------
+(program exited with code: 0)
+Press return to continue
+```
+解析：这里发现了几个好玩的问题，首先，当我们用new为一个数组分配内存时，原有的指针被可以**作为数组名**来使用，本例中也可以通过`p_char[2]`来调用第三个元素，当然本身指针的功能也没有消失，我们依旧可以通过指针自加来改变指针指向来更改数组数据。
+
+其次，我先给大家上一个错误实例
+```
+ int main()
+  {
+   .......
+    for(int j=0;j<i;j++)
+   {
+    cout<< *(p_char); 
+    p_char++;
+    }
+    
+   delete  [] p_char;
+   ......
+   }
+```
+运行结果如下
+```
+please input the length of array:
+4
+now you can input the 1th data
+l
+now you can input the 2th data
+o
+now you can input the 3th data
+v
+now you can input the 4th data
+e
+*** Error in `./04': free(): invalid pointer: 0x00000000015e0014 ***
+the data you input is loveAborted (core dumped)
+
+
+------------------
+(program exited with code: 134)
+Press return to continue
+```
+
+显示无效指针了，因为我在输出数据时改变指针值了。所以我们需要注意一点当我们需要释放内存时，需要检查是否是我们new申请的地址。这在数组中是一个经常会犯的错误，需要大家注意。
+
+---
+
+###3.作业
+
+先是回答上期的作业
+1.取决于计算机cpu字长16位计算机一次最大能处理2^15的数据，但是这个问题本身没有意义，因为即便字长偏小也可以采用16位模拟32位的方法进行超字节运算。
+2.可以通过自增自减的前后顺序调整值在调用前自增或自减，但是容易引起混乱，开个[传送门](http://bbs.csdn.net/topics/370153775)可以借鉴一下。
+
+布置作业
+
+采用malloc()函数编写一个变长数组，输入
+>If you were the lion, the fox will deceive you; if you were the lamb, the fox could come to eat you. 
+
+输出并统计字数。
+
+---
+以上纯属个人观点，欢迎大家指正，如果有什么地方令您不满，请尽快告知，鄙人会酌情判断进行修改。若修改后鄙人观点还是令您不悦——你咬我啊。(╯°Д°)╯︵ ┻━┻
+
